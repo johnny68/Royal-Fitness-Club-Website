@@ -22,18 +22,16 @@ export class TablesComponent implements OnInit {
     private loadUsers() {
         this.service.get()
         .subscribe((response ) => {
-            console.log(response);
-            console.log(response.headers);
             const body = response.json();
             if (response.status === 200) {
                 this.users = body.data;
-                console.log('here in if');
             }
         });
     }
 
     public gotoUser(user) {
-        console.log('clicked');
+        localStorage.setItem('user_email', user.user_email);
+        localStorage.setItem('user_name', user.user_name);
         this.router.navigate(['users/get'], {queryParams: {id: user.user_id}});
     }
 }

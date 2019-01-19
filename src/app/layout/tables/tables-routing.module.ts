@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { TablesComponent } from './tables.component';
-import { GetUserComponent } from './get-user/get-user.component';
-
 const routes: Routes = [
     {
         path: '', component: TablesComponent

@@ -1,8 +1,8 @@
 <div [@routerTransition]>
-  <app-page-header [heading]="'Users'" [icon]="'fa-table'"></app-page-header>
+  <app-page-header [heading]="'Users'" [icon]="'fa-user-circle-o'"></app-page-header>
   <div class="row">
     <div class="card-body table-responsive">
-      <table class="table table-hover table-striped">
+      <table class="table table-hover table-striped sortable">
         <thead>
           <tr>
             <th>Gym Member ID</th>
@@ -23,5 +23,3 @@
     </div>
   </div>
 </div>
-
-<router-outlet></router-outlet>

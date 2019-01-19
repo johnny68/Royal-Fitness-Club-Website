@@ -15,4 +15,8 @@ export class UserTableService {
     public getSpecific(user_id) {
         return this.http.get(this.get_specific_url + '?id=' + user_id);
     }
+
+    public getCities() {
+        return this.http.get('./assets/cities.json');
+    }
 }

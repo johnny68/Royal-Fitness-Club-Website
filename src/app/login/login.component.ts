@@ -44,10 +44,8 @@ export class LoginComponent implements OnInit {
                 localStorage.setItem('admin_username', JSON.stringify(body.data[0].admin_username));
                 localStorage.setItem('admin_id', JSON.stringify(body.data[0].admin_id));
                 localStorage.setItem('admin_name', JSON.stringify(body.data[0].admin_name));
-                console.log('here');
                 this.router.navigate(['/dashboard']);
             } else {
-                console.log(body);
                 alert('Invalid Login and Password, Please try again');
                 this.router.navigate(['/login']);
             }

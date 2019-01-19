@@ -8,14 +8,18 @@ import { LayoutComponent } from './layout.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HeaderComponent } from './components/header/header.component';
 import { GetUserComponent } from './tables/get-user/get-user.component';
+import { PageHeaderModule } from '../shared';
+
 
 @NgModule({
     imports: [
         CommonModule,
         LayoutRoutingModule,
         TranslateModule,
-        NgbDropdownModule
+        NgbDropdownModule,
+        PageHeaderModule
     ],
-    declarations: [LayoutComponent, SidebarComponent, HeaderComponent, GetUserComponent]
+    declarations: [LayoutComponent, SidebarComponent, HeaderComponent, GetUserComponent],
+    exports: [PageHeaderModule]
 })
 export class LayoutModule {}
