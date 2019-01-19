@@ -1,46 +1,56 @@
-import { LoginService } from './login.service';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
+import { LoginService } from './login.service';
 import { Router } from '@angular/router';
-
+import { routerTransition } from '../router.animations';
+import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.scss'],
+    animations: [routerTransition()]
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
+    userName = '';
+    password = '';
+    angForm: FormGroup;
 
-  username = '';
-  password = '';
-  angForm: FormGroup;
+    constructor(
+        public router: Router,
+        private fb: FormBuilder,
+        private service: LoginService
+        ) {
+            this.createForm();
+    }
 
-  constructor(private fb: FormBuilder,
-    private router: Router,
-    private service: LoginService) {
-   this.createForm();
-  }
-
-   createForm() {
+    createForm() {
     this.angForm = this.fb.group({
-       username: ['', [Validators.required, Validators.email]],
-       password: ['', [Validators.required, Validators.min(8)]]
+        userName: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required]]
     });
-  }
+    }
 
-  onLogin() {
-    console.log(this.username, this.password);
-    this.service.login(this.username, this.password)
-    .subscribe((response) => {
-      const body = response.json();
-      if (body.status === 'success') {
-        console.log(body);
-        sessionStorage['loginStatus'] = 1;
-        this.router.navigate(['/home']);
-      } else {
-        console.log(body);
-        alert('Invalid Login and Password');
-      }
-    });
-  }
+    ngOnInit() {}
+
+    onLoggedin() {
+
+        console.log(this.userName, this.password);
+        this.service.login(this.userName, this.password)
+        .subscribe((response) => {
+            const body = response.json();
+            console.log(body);
+            if (body.success === 'success') {
+                sessionStorage.setItem('isLoggedin', '1');
+                localStorage.setItem('admin_username', JSON.stringify(body.data[0].admin_username));
+                localStorage.setItem('admin_id', JSON.stringify(body.data[0].admin_id));
+                localStorage.setItem('admin_name', JSON.stringify(body.data[0].admin_name));
+                console.log('here');
+                this.router.navigate(['/dashboard']);
+            } else {
+                console.log(body);
+                alert('Invalid Login and Password, Please try again');
+                this.router.navigate(['/login']);
+            }
+        });
+    }
 }

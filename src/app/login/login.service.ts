@@ -19,6 +19,8 @@ export class LoginService implements CanActivate {
             password: password
         };
 
+        console.log(userName);
+
         const headers = new Headers( { 'Content-Type': 'application/json' });
         const requestOptions = new RequestOptions({ headers: headers });
 
@@ -39,10 +41,10 @@ export class LoginService implements CanActivate {
     }
 
     public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        if (sessionStorage['loginStatus'] === '1') {
+        if (sessionStorage['isLoggedin'] === '1') {
+            console.log(localStorage.getItem('isLoggedin'));
             return true;
         }
-
         this.router.navigate(['/login']);
         return false;
     }

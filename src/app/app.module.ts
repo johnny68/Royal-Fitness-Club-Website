@@ -1,59 +1,51 @@
 import { LoginService } from './login/login.service';
-import { BrowserModule } from '@angular/platform-browser';
+import { SignupService } from './signup/signup.service';
+import { CommonModule } from '@angular/common';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
-
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpModule } from '@angular/http';
 
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { RouterModule, Routes } from '@angular/router';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { ClassesComponent } from './classes/classes.component';
-import { PlansComponent } from './plans/plans.component';
-import { BenefitsComponent } from './benefits/benefits.component';
-import { HomeComponent } from './home/home.component';
-import { MyServices } from './services';
+import { AuthGuard } from './shared';
+import { UserTableService } from './layout/tables/user.service';
 
-
-const appRoutes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'classes', component: ClassesComponent},
-  { path: 'plans', component: PlansComponent},
-  { path: 'benefits', component: BenefitsComponent},
-  { path: 'home', component: HomeComponent},
-  { path: '**', component: PageNotFoundComponent }
-  ];
-
+// AoT requires an exported function for factories
+export const createTranslateLoader = (http: HttpClient) => {
+    /* for development
+    return new TranslateHttpLoader(
+        http,
+        '/start-angular/SB-Admin-BS4-Angular-6/master/dist/assets/i18n/',
+        '.json'
+    ); */
+    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+};
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    RegisterComponent,
-    PageNotFoundComponent,
-    ClassesComponent,
-    PlansComponent,
-    BenefitsComponent,
-    HomeComponent
-  ],
-  imports: [
-    HttpModule,
-    ReactiveFormsModule,
-    FormsModule,
-    BrowserModule,
-    RouterModule.forRoot(
-      appRoutes,
-      {enableTracing: true}
-    )
-  ],
-  providers: [
-    LoginService,
-    MyServices
-  ],
-  bootstrap: [AppComponent]
+    imports: [
+        CommonModule,
+        BrowserModule,
+        HttpModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: createTranslateLoader,
+                deps: [HttpClient]
+            }
+        }),
+        AppRoutingModule
+    ],
+    declarations: [AppComponent],
+    providers: [AuthGuard,
+                LoginService,
+                UserTableService,
+            SignupService],
+    bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
