@@ -1,268 +1,112 @@
 <div [@routerTransition]>
-    <app-page-header [heading]="'Forms'" [icon]="'fa-edit'"></app-page-header>
-    <div class="row">
-        <div class="col-lg-6">
-            <div class="form-group">
-                <label>Gym Member Name</label>
-                <input [(ngModel)]="username" type="text" class="form-control">
-            </div>
-            <div class="form-group">
-                <label>Email Address</label>
-                <input [(ngModel)]="useremail" type="text" class="form-control">
-            </div>
-            <div class="form-group">
-                <label>Aadhaar</label>
-                <input [(ngModel)]="aadhaar" type="text" class="form-control" placeholder="Enter only Street Address">
-            </div>
-            <div class="form-group">
-                <label>Address</label>
-                <input [(ngModel)]="address" type="text" class="form-control" placeholder="Enter only Street Address">
-            </div>
-            <div class="form-group">
-                <label>City</label>
-                <select #selected [ngModel]="city" (change)="citySelectedValue(selected.value)" class="form-control">
-                    <option *ngFor="let city of cities | orderBy: 'name':false" [value]="city.id">{{city.name}}</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Pincode</label>
-                <input [(ngModel)]="pincode" type="number" class="form-control" placeholder="Enter only Mobile Number">
-            </div>
-
-            <div class="form-group">
-                <div class="input-group">
-                    <ngb-datepicker #dp [(ngModel)]="datemodel" (navigate)="date = $event.next"></ngb-datepicker>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label>Mobile Number</label>
-                <input [(ngModel)]="mobilenumber" type="number" class="form-control" placeholder="Enter only Pincode">
-            </div>
-
-            <div class="form-group">
-                <div class="radio">
-                    <label>
-                        <input type="radio" name="gender" id="optionsRadios1" value="option1"> Male
-                    </label>
-                </div>
-                <div class="radio">
-                    <label>
-                        <input type="radio" name="gender" id="optionsRadios2" value="option2"> Female
-                    </label>
-                </div>
-            </div>
-
-            <div class="form-group">
-                    <label>Training Type</label>
-                    <select #training [ngModel]="singletype" (change)="trainingSelectedValue(training.value)" class="form-control">
-                        <option *ngFor="let singletype of trainingtypes" [value]="singletype.id">{{singletype.type}}</option>
-                    </select>
-                </div>
-
-
-                <div class="form-group">
-                        <label>Purpose of Joining The Gym</label>
-                        <select #purpose [ngModel]="singlePurpose" (change)="purposeSelectedValue(purpose.value)" class="form-control">
-                            <option *ngFor="let singlePurpose of purposes" [value]="singlePurpose.id">{{singlePurpose.type}}</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                            <label>Memeber Blood Type</label>
-                            <select #blood [ngModel]="bloodtype" (change)="bloodSelectedValue(blood.value)" class="form-control">
-                                <option *ngFor="let bloodtype of bloodTypes" [value]="bloodtype.type">{{bloodtype.type}}</option>
-                            </select>
-                        </div>
-            <fieldset class="form-group">
-                <label>Text area</label>
-                <textarea class="form-control" rows="3"></textarea>
-            </fieldset>
-
-            <div class="form-group">
-                <label>Checkboxes</label>
-                <div class="checkbox">
-                    <label>
-                        <input name="1" type="checkbox" value=""> Checkbox 1
-                    </label>
-                </div>
-                <div class="checkbox">
-                    <label>
-                        <input name="1" type="checkbox" value=""> Checkbox 2
-                    </label>
-                </div>
-                <div class="checkbox">
-                    <label>
-                        <input name="1" type="checkbox" value=""> Checkbox 3
-                    </label>
-                </div>
-            </div>
-            <fieldset class="form-group">
-                <label>Radio Buttons</label>
-                <div class="radio">
-                    <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
-                        Radio 1
-                    </label>
-                </div>
-                <div class="radio">
-                    <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2"> Radio 2
-                    </label>
-                </div>
-                <div class="radio">
-                    <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3"> Radio 3
-                    </label>
-                </div>
-            </fieldset>
-
-            <fieldset class="form-group">
-                <label>Inline Radio Buttons</label>
-                <label class="radio-inline">
-                    <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline1" value="option1" checked="">1
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline2" value="option2">2
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline3" value="option3">3
-                </label>
-            </fieldset>
-
-            <div class="form-group">
-                <label>Selects</label>
-                <select class="form-control">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                </select>
-            </div>
-
-            <fieldset class="form-group">
-                <label>Multiple Selects</label>
-                <select multiple="" class="form-control">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                </select>
-            </fieldset>
-
-            <button type="submit" class="btn btn-secondary">Submit Button</button>
-            <button type="reset" class="btn btn-secondary">Reset Button</button>
-            <div class="form-group">
-                <button (click)="onSave()" class="btn btn-success">Save</button>
-                <button (click)="onCancel()" style="margin-left: 10px;" class="btn btn-danger">Cancel</button>
-            </div>
-
-        </div>
-        <div class="col-lg-6">
-            <h4>Disabled Form States</h4>
-
-            <form role="form">
-
-                <fieldset disabled="">
-
-                    <div class="form-group">
-                        <label for="disabledSelect">Disabled input</label>
-                        <input class="form-control" id="disabledInput" type="text" placeholder="Disabled input"
-                            disabled="">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="disabledSelect">Disabled select menu</label>
-                        <select id="disabledSelect" class="form-control">
-                            <option>Disabled select</option>
-                        </select>
-                    </div>
-
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox"> Disabled Checkbox
-                        </label>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">Disabled Button</button>
-
-                </fieldset>
-
-            </form>
-            <br>
-
-            <h4>Form Validation</h4>
-
-            <form role="form">
-
-                <div class="form-group has-success">
-                    <label class="form-control-label" for="inputSuccess">Input with success</label>
-                    <input type="text" class="form-control form-control-success" id="inputSuccess">
-                </div>
-
-                <div class="form-group has-warning">
-                    <label class="form-control-label" for="inputWarning">Input with warning</label>
-                    <input type="text" class="form-control form-control-warning" id="inputWarning">
-                </div>
-
-                <div class="form-group has-danger">
-                    <label class="form-control-label" for="inputError">Input with danger</label>
-                    <input type="text" class="form-control form-control-danger" id="inputError">
-                </div>
-
-            </form>
-
-            <h4>Input Groups</h4>
-
-            <form role="form">
-
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">@</span>
-                    </div>
-                    <!-- <span class="input-group-addon">@</span> -->
-                    <input type="text" class="form-control" placeholder="Username">
-                </div>
-
-                <div class="form-group input-group">
-                    <input type="text" class="form-control">
-                    <div class="input-group-append">
-                        <span class="input-group-text">.00</span>
-                    </div>
-                </div>
-
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1"><i class="fa fa-eur"></i></span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="Font Awesome Icon">
-                </div>
-
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">$</span>
-                    </div>
-                    <input type="text" class="form-control">
-                    <div class="input-group-append">
-                        <span class="input-group-text">.00</span>
-                    </div>
-                </div>
-
-                <div class="form-group input-group">
-                    <input type="text" class="form-control">
-                    <div class="input-group-append">
-                        <button class="btn btn-secondary" type="button"><i class="fa fa-search"></i></button>
-                    </div>
-                </div>
-
-            </form>
-
-            <p>For complete documentation, please visit <a target="_blank" href="http://v4-alpha.getbootstrap.com/components/forms/">Bootstrap's
-                    Form Documentation</a>.</p>
-
-        </div>
+  <app-page-header [heading]="'Forms'" [icon]="'fa-edit'"></app-page-header>
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="form-group">
+        <h4>Basic Personal Details</h4>
+        <label>Gym Member Name</label>
+        <input #name="ngModel" [(ngModel)]="username" name="name"type="text" class="form-control" required minlength="4">
+        <div *ngIf="!username" style="color: red">Required</div>
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input #email="ngModel" [(ngModel)]="useremail" type="text" class="form-control">
+        <div *ngIf="!useremail" style="color: red">Required</div>
+      </div>
+      <div class="form-group">
+        <label>Aadhaar</label>
+        <input [(ngModel)]="aadhaar" type="text" class="form-control" placeholder="Enter only Numbers">
+        <div *ngIf="!aadhaar" style="color: red">Required</div>
+      </div>
+      <div class="form-group">
+        <label>Address</label>
+        <input [(ngModel)]="address" type="text" class="form-control" placeholder="Enter only Street Address">
+      </div>
+      <div class="form-group">
+        <label>City</label>
+        <select #selected [ngModel]="city" (change)="citySelectedValue(selected.value)" class="form-control">
+          <option *ngFor="let city of cities | orderBy: 'name':false" [value]="city.id">{{city.name}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Pincode</label>
+        <input [(ngModel)]="pincode" type="number" class="form-control" placeholder="Enter only Pincode">
+      </div>
+      <div class="form-group">
+        <label>Mobile Number</label>
+        <input [(ngModel)]="mobilenumber" type="number" class="form-control" placeholder="Enter only Mobile Number">
+      </div>
+      <h4>Membership Details</h4>
+      <div class="form-group">
+        <label>Training Type</label>
+        <select #training [ngModel]="singletype" (change)="trainingSelectedValue(training.value)" class="form-control">
+          <option *ngFor="let singletype of trainingtypes" [value]="singletype.id">{{singletype.type}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Purpose of Joining The Gym</label>
+        <select #purpose [ngModel]="singlePurpose" (change)="purposeSelectedValue(purpose.value)" class="form-control">
+          <option *ngFor="let singlePurpose of purposes" [value]="singlePurpose.id">{{singlePurpose.type}}</option>
+        </select>
+      </div>
+      <div class="text-left">
+        <button (click)="onCancel()" style="margin-left: 10px; margin-top: 20px;" class="btn btn-danger">Cancel</button>
+      </div>
     </div>
-    <!-- /.row -->
+    <div class="col-lg-6">
+      <h4>Physical Details</h4>
+      <div class="form-group">
+        <label>Enter Birthday</label>
+        <div class="input-group">
+          <ngb-datepicker #dp [(ngModel)]="datemodel" (navigate)="date = $event.next"></ngb-datepicker>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <label>Choose Gender</label>
+          <div class="radio">
+            <label>
+              <input #male type="radio" [ngModel]="gender" style="margin-left: 100px;" name="gender" id="optionsRadios1"
+                value="1" (click)="getGender(male.value)">
+              Male
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input #female type="radio" style="margin-left: 100px;" ng-model="gender.value" name="gender" id="optionsRadios1"
+                value="2" (click)="getGender(female.value)">
+              Female
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Memeber Blood Type</label>
+        <select #blood [ngModel]="bloodtype" (change)="bloodSelectedValue(blood.value)" class="form-control">
+          <option *ngFor="let bloodtype of bloodTypes" [value]="bloodtype.type">{{bloodtype.type}}</option>
+        </select>
+      </div>
+      <div class="form-group input-group">
+        <input [(ngModel)]="height" type="number" class="form-control" placeholder="Enter in cm (CMs)">
+      </div>
+      <div class="form-group input-group">
+        <input [(ngModel)]="weight" type="number" class="form-control" placeholder="Enter in Kg (Kilos)">
+      </div>
+      <div class="form-group">
+        <label>Medical History</label>
+        <textarea [(ngModel)]="medicalHistory" class="form-control" rows="2" maxlength="200" placeholder="Give Your Medical History, Limit is 200 Characters Only"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Did you go to any other gym ?</label>
+        <input [(ngModel)]="previousGym" type="text" class="form-control" placeholder="If No, Type N/A">
+      </div>
+      <div class="form-group">
+        <label>Do You Take any Protien ? Or Did you used to take protiens?</label>
+        <input [(ngModel)]="pastProtien" type="text" class="form-control" placeholder="If No, Type N/A">
+      </div>
+      <div class="text-right">
+        <button (click)="onSave()" style="margin-right: 20px;" class="btn btn-success">Save & Next</button>
+      </div>
+    </div>
+  </div>
 </div>

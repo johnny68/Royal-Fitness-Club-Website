@@ -19,7 +19,7 @@ export class FormComponent implements OnInit {
     address: String;
     pincode: Number;
     mobileNumber: Number;
-    gender: Number;
+    gender;
     bloodgroup;
     height: Number;
     weight: Number;
@@ -53,6 +53,9 @@ export class FormComponent implements OnInit {
         this.loadTrainingTypes();
         this.loadPurposes();
         this.loadBloodGroups();
+    }
+    getGender(event) {
+        this.gender = event;
     }
 
     loadTrainingTypes() {
@@ -109,9 +112,14 @@ export class FormComponent implements OnInit {
         // this.getState(event);
     }
 
+    updateBody() {
+        console.log('here');
+    }
+
     onSave() {
-        console.log(`${this.citynumber}  ${this.username}`);
-        console.log(this.useremail);
+        console.log(`Name: ${this.username} Email: ${this.useremail} Addhar: ${this.aadhaar} address:${this.address}`);
+
+
         //const newDate = ` ${this.datemodel.day}-${this.datemodel.month}-${this.datemodel.year}`;
         //this.bloodGroup;
         this.sendData();
