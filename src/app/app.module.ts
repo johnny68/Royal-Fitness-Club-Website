@@ -13,6 +13,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
 import { UserTableService } from './layout/tables/user.service';
+import { FormService } from './layout/form/form.service';
 
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) => {
@@ -43,9 +44,10 @@ export const createTranslateLoader = (http: HttpClient) => {
     ],
     declarations: [AppComponent],
     providers: [AuthGuard,
-                LoginService,
-                UserTableService,
-            SignupService],
+        LoginService,
+        UserTableService,
+        SignupService,
+        FormService],
     bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

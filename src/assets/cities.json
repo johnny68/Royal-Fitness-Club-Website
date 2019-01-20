@@ -1,5 +1,6 @@
 {
-  "data": [{
+  "data": [
+    {
       "id": "1",
       "name": "Mumbai",
       "state": "Maharashtra"
@@ -6103,6 +6104,41 @@
       "id": "1221",
       "name": "Dispur",
       "state": "Assam"
+    },
+    {
+      "id": "1222",
+      "name": "Dehu Road",
+      "state": "Maharashtra"
+    },
+    {
+      "id": "1223",
+      "name": "Pimpri",
+      "state": "Maharashtra"
+    },
+    {
+      "id": "1224",
+      "name": "Ravet",
+      "state": "Maharashtra"
+    },
+    {
+      "id": "1225",
+      "name": "Chinchwad",
+      "state": "Maharashtra"
+    },
+    {
+      "id": "1226",
+      "name": "Bhosari",
+      "state": "Maharashtra"
+    },
+    {
+      "id": "1227",
+      "name": "Sai Nagar",
+      "state": "Maharashtra"
+    },
+    {
+      "id": "1228",
+      "name": "Kiwale",
+      "state": "Maharashtra"
     }
   ]
 }
