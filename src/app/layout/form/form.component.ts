@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../router.animations';
 import { UserTableService } from '../tables/user.service';
-import {NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateStruct, NgbCalendar, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormService } from './form.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -13,6 +15,7 @@ import { FormService } from './form.service';
 })
 export class FormComponent implements OnInit {
 
+    register_form: FormGroup;
     username: String;
     useremail: String;
     aadhaar: String;
@@ -20,6 +23,7 @@ export class FormComponent implements OnInit {
     pincode: Number;
     mobileNumber: Number;
     gender;
+    birthday: String;
     bloodgroup;
     height: Number;
     weight: Number;
@@ -32,21 +36,51 @@ export class FormComponent implements OnInit {
     private trainingNumber;
     private purposeNumber;
     private bloodGroup;
+    blood: String;
     datemodel;
+    cityname;
 
     // json variables for loops
     cities: any[];
     city: any[];
+    city1: any[];
     trainingtypes: any[];
     singleType: any[];
     purposes: any[];
     singlePurpose: any[];
     bloodTypes: any[];
     bloodtype: any[];
+    getCities: any[];
+    public user: object[];
 
+    constructor(
+        private router: Router,
+        private service: UserTableService,
+        formBuilder: FormBuilder,
+        private formService: FormService,
+        private modalService: NgbModal) {
 
-    constructor(private service: UserTableService,
-        private formService: FormService) {}
+        this.register_form = formBuilder.group({
+            username: [null, Validators.required],
+            useremail: [null, Validators.compose([Validators.required,
+            Validators.pattern(/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/)])],
+            aadhaar: [null, Validators.compose([Validators.required, Validators.maxLength(12), Validators.minLength(12)])],
+            address: [null, Validators.required],
+            pincode: [null, Validators.compose([Validators.required, Validators.maxLength(6), Validators.minLength(6)])],
+            city: [null, Validators.required],
+            mobileNumber: [null, Validators.compose([Validators.required, Validators.maxLength(10), Validators.minLength(10)])],
+            training: [null, Validators.required],
+            purpose: [null, Validators.required],
+            birthday: [null, Validators.required],
+            gender: [null, Validators.required],
+            bloodtype: [null, Validators.required],
+            height: [null, Validators.required],
+            weight: [null, Validators.required],
+            medicalHistory: [null, Validators.compose([Validators.required, Validators.maxLength(10)])],
+            previousGym: [null, Validators.required],
+            pastProtien: [null, Validators.required]
+        });
+    }
 
     ngOnInit() {
         this.loadCities();
@@ -60,74 +94,166 @@ export class FormComponent implements OnInit {
 
     loadTrainingTypes() {
         this.formService.getTrainingType()
-        .subscribe ((respose) => {
-            const body = respose.json();
-            this.trainingtypes = body.data;
-        });
+            .subscribe((respose) => {
+                const body = respose.json();
+                this.trainingtypes = body.data;
+            });
     }
 
     loadPurposes() {
         this.formService.getPurpose()
-        .subscribe((response) => {
-            const body = response.json();
-            this.purposes = body.data;
-        });
+            .subscribe((response) => {
+                const body = response.json();
+                this.purposes = body.data;
+            });
     }
 
     loadBloodGroups() {
         this.formService.getBloodGroup()
-        .subscribe((response) => {
-            console.log(response);
-            const body = response.json();
-            this.bloodTypes = body.bloodtype;
-            console.log(this.bloodTypes);
-        });
+            .subscribe((response) => {
+                const body = response.json();
+                this.bloodTypes = body.bloodtype;
+            });
     }
 
     loadCities() {
         this.service.getCities()
-        .subscribe((response) => {
-            const body = response.json();
-            this.cities = body.data;
-        });
+            .subscribe((response) => {
+                const body = response.json();
+                this.cities = body.data;
+            });
     }
     bloodSelectedValue(event): void {
         this.bloodGroup = event;
-        console.log(this.bloodGroup);
     }
 
     trainingSelectedValue(event): void {
-        this.trainingNumber = parseInt( event, 10);
-        console.log(this.trainingNumber);
+        this.trainingNumber = parseInt(event, 10);
     }
 
     purposeSelectedValue(event): void {
         this.purposeNumber = parseInt(event, 10);
-        console.log(this.purposeNumber);
     }
 
     citySelectedValue(event): void {
-        this.citynumber = parseInt(event , 10);
-        console.log(this.citynumber);
-        // this.getState(event);
+        this.citynumber = parseInt(event, 10);
+        this.getloadCities(this.citynumber);
     }
 
-    updateBody() {
-        console.log('here');
+    getGenderForModal(code) {
+        let gender = '';
+        if (code === '1') {
+            gender = 'Male';
+        } else if (code === '2') {
+            gender = 'Female';
+        }
+        return gender;
     }
 
-    onSave() {
-        console.log(`Name: ${this.username} Email: ${this.useremail} Addhar: ${this.aadhaar} address:${this.address}`);
+    getPurpose(code) {
+        let purpose = '';
+        if (code === 1) {
+            purpose = 'Weight Loss';
+        } else if (code === 2) {
+            purpose = 'Weight Gain';
+        } else if (code === 3) {
+            purpose = 'Diet Plan';
+        } else if (code === 4) {
+            purpose = 'Trekking';
+        }
+        return purpose;
+    }
 
+    getTrainingType(code) {
+        let trainingType = '';
+        if (code === 1) {
+            trainingType = 'Regular';
+        } else if (code === 2) {
+            trainingType = 'Personal Training';
+        } else if (code === 3) {
+            trainingType = 'Dance';
+        } else if (code === 4) {
+            trainingType = 'Yoga';
+        } else if (code === 5) {
+            trainingType = 'Cross Fit';
+        }
+        return trainingType;
+    }
 
-        //const newDate = ` ${this.datemodel.day}-${this.datemodel.month}-${this.datemodel.year}`;
-        //this.bloodGroup;
-        this.sendData();
-        // this.getState (this.city);
+    getBloodType(code) {
+        let blood = '';
+        if (code === 1) {
+            blood = 'A +';
+        } else if (code === 2) {
+            blood = 'A -';
+        } else if (code === 3) {
+            blood = 'B +';
+        } else if (code === 4) {
+            blood = 'B -';
+        } else if (code === 5) {
+            blood = 'AB +';
+        } else if (code === 6) {
+            blood = 'AB -';
+        } else if (code === 7) {
+            blood = 'O +';
+        } else if (code === 8) {
+            blood = 'O -';
+        }
+        return blood;
+    }
+    getloadCities(citycode: String) {
+        this.service.getCities()
+            .subscribe((response) => {
+                const body = response.json();
+                this.getCities = body.data;
+                this.city1 = this.getCities.find((item) => item.id === citycode.toString());
+                return true;
+            });
+    }
+
+    onSave(content) {
+        //this.openVerticallyCentered(content);
+        this.birthday = `${this.datemodel.day}-${this.datemodel.month}-${this.datemodel.year}`;
+        if (this.register_form.valid) {
+            console.log('here on save');
+            const modalref = this.modalService.open(content, { centered: true, size: 'lg' });
+            modalref.result.then(() => {
+                this.sendData();
+            }, () => {
+                alert('hi');
+            });
+        } else {
+            alert('Form Filled is in-correct');
+        }
+    }
+
+    openVerticallyCentered(content) {
+        console.log('here on openVertical');
+        const modalref = this.modalService.open(content, { centered: true, size: 'lg' });
+        modalref.result.then(() => {
+            this.sendData();
+        }, () => {
+            alert('hi');
+        });
     }
 
     sendData() {
-        // this.formService.post(this.username)
+        console.log('here on sendData');
+        this.formService.post(this.useremail, this.username, this.aadhaar, this.address, this.citynumber, this.pincode,
+            this.mobileNumber, this.birthday, this.gender, this.bloodGroup, this.height, this.weight, this.purposeNumber,
+            this.trainingNumber, this.medicalHistory, this.previousGym, this.pastProtien)
+            .subscribe((response) => {
+                console.log(this.mobileNumber);
+                const body = response.json();
+                if (body.status === 'success') {
+                    alert('Submitted successfully');
+                    this.gotoBilling(body.id);
+                } else {
+                    alert('Not Submitted');
+                }
+            });
     }
-
+    public gotoBilling(user) {
+        this.router.navigate(['users/get-billing'], {queryParams: {id: user}});
+    }
 }

@@ -59,7 +59,7 @@ export class GetUserComponent implements OnInit {
 
   getCity(code_city) {
     console.log('here');
-    let city = this.loadCities(code_city);
+    const city = this.loadCities(code_city);
     console.log(city);
   }
 

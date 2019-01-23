@@ -9,6 +9,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HeaderComponent } from './components/header/header.component';
 import { GetUserComponent } from './tables/get-user/get-user.component';
 import { PageHeaderModule } from '../shared';
+import { GetUserBillingComponent } from './tables/get-user-billing/get-user-billing';
 
 
 @NgModule({
@@ -19,7 +20,7 @@ import { PageHeaderModule } from '../shared';
         NgbDropdownModule,
         PageHeaderModule
     ],
-    declarations: [LayoutComponent, SidebarComponent, HeaderComponent, GetUserComponent],
+    declarations: [LayoutComponent, SidebarComponent, HeaderComponent, GetUserComponent, GetUserBillingComponent],
     exports: [PageHeaderModule]
 })
 export class LayoutModule {}

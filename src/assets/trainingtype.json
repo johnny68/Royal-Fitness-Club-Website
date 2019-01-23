@@ -2,11 +2,23 @@
     "data": [
         {
             "id": "1",
-            "type": "Personal Training"
+            "type": "Regular Training"
         },
         {
             "id": "2",
-            "type": "Regular Training"
+            "type": "Personal Training"
+        },
+        {
+            "id": "3",
+            "type": "Dance"
+        },
+        {
+            "id": "4",
+            "type": "Yoga"
+        }
+        ,{
+            "id": "5",
+            "type": "Cross Fit"
         }
     ]
 }
