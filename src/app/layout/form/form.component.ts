@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../router.animations';
 import { UserTableService } from '../tables/user.service';
-import { NgbDateStruct, NgbCalendar, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormService } from './form.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { stringify } from '@angular/compiler/src/util';
 
 
 @Component({
@@ -52,6 +53,7 @@ export class FormComponent implements OnInit {
     bloodtype: any[];
     getCities: any[];
     public user: object[];
+    selectedImage: object;
 
     constructor(
         private router: Router,
@@ -212,7 +214,7 @@ export class FormComponent implements OnInit {
     }
 
     onSave(content) {
-        //this.openVerticallyCentered(content);
+        // this.openVerticallyCentered(content);
         this.birthday = `${this.datemodel.day}-${this.datemodel.month}-${this.datemodel.year}`;
         if (this.register_form.valid) {
             console.log('here on save');
@@ -239,9 +241,11 @@ export class FormComponent implements OnInit {
 
     sendData() {
         console.log('here on sendData');
-        this.formService.post(this.useremail, this.username, this.aadhaar, this.address, this.citynumber, this.pincode,
-            this.mobileNumber, this.birthday, this.gender, this.bloodGroup, this.height, this.weight, this.purposeNumber,
-            this.trainingNumber, this.medicalHistory, this.previousGym, this.pastProtien)
+        this.formService.post(stringify(this.useremail), stringify(this.username), stringify(this.aadhaar), stringify(this.address),
+            stringify(this.citynumber), stringify(this.pincode), stringify(this.mobileNumber), stringify(this.birthday),
+            stringify(this.gender), stringify(this.bloodGroup), stringify(this.height), stringify(this.weight),
+            stringify(this.purposeNumber), stringify(this.trainingNumber), stringify(this.medicalHistory), stringify(this.previousGym),
+            stringify(this.pastProtien), this.selectedImage)
             .subscribe((response) => {
                 console.log(this.mobileNumber);
                 const body = response.json();
@@ -254,6 +258,10 @@ export class FormComponent implements OnInit {
             });
     }
     public gotoBilling(user) {
-        this.router.navigate(['users/get-billing'], {queryParams: {id: user}});
+        this.router.navigate(['users/user-billing'], { queryParams: { id: user, username: this.username } });
+    }
+
+    public onSelected(event) {
+        this.selectedImage = event.target.files[0];
     }
 }

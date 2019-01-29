@@ -9,8 +9,9 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HeaderComponent } from './components/header/header.component';
 import { GetUserComponent } from './tables/get-user/get-user.component';
 import { PageHeaderModule } from '../shared';
-import { GetUserBillingComponent } from './tables/get-user-billing/get-user-billing';
-
+import { GetUserBillingComponent } from './form/get-user-billing/get-user-billing.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { GetUserDietComponent } from './form/get-user-diet/get-user-diet.component';
 
 @NgModule({
     imports: [
@@ -18,9 +19,17 @@ import { GetUserBillingComponent } from './tables/get-user-billing/get-user-bill
         LayoutRoutingModule,
         TranslateModule,
         NgbDropdownModule,
-        PageHeaderModule
+        PageHeaderModule,
+        FormsModule,
+        ReactiveFormsModule
     ],
-    declarations: [LayoutComponent, SidebarComponent, HeaderComponent, GetUserComponent, GetUserBillingComponent],
+    declarations: [LayoutComponent,
+        SidebarComponent,
+        HeaderComponent,
+        GetUserComponent,
+        GetUserBillingComponent,
+        GetUserDietComponent
+    ],
     exports: [PageHeaderModule]
 })
-export class LayoutModule {}
+export class LayoutModule { }

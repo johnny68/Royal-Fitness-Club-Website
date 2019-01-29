@@ -19,4 +19,8 @@ export class UserTableService {
     public getCities() {
         return this.http.get('./assets/cities.json');
     }
+
+    public getPlans() {
+        return this.http.get('./assets/plans.json');
+    }
 }

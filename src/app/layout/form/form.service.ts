@@ -4,51 +4,51 @@ import { Http, RequestOptions, Headers } from '@angular/http';
 @Injectable()
 export class FormService {
     private createUrl = 'http://localhost:3000/user/create';
+    private billUrl = 'http://localhost:3000/user/billing/first';
 
     constructor(private http: Http) { }
     public post(
-        email: String,
-        name: String,
-        aaddhar: String,
-        address: String,
-        city: Number,
-        pincode: Number,
-        mobile: Number,
-        DOB: String,
-        gender: Number,
-        bloodGroup: String,
-        height: Number,
-        weight: Number,
-        purpose: Number,
-        trainingType: Number,
-        medicalHistory: String,
-        previousGym: String,
-        pastProtien: String
+        email: string,
+        name: string,
+        aaddhar: string,
+        address: string,
+        city: string,
+        pincode: string,
+        mobile: string,
+        DOB: string,
+        gender: string,
+        bloodGroup: string,
+        height: string,
+        weight: string,
+        purpose: string,
+        trainingType: string,
+        medicalHistory: string,
+        previousGym: string,
+        pastProtien: string,
+        imageFile: any
     ) {
-        const body = {
-            user_email: email,
-            user_name: name,
-            user_aaddhar: aaddhar,
-            user_address: address,
-            user_city: city,
-            user_pincode: pincode,
-            user_mobile_number: mobile,
-            user_date_of_birth: DOB,
-            user_gender: gender,
-            user_blood_group: bloodGroup,
-            user_height: height,
-            user_weight: weight,
-            user_purpose: purpose,
-            user_training_type: trainingType,
-            user_medical_history: medicalHistory,
-            user_past_gym: previousGym,
-            user_past_protien: pastProtien
-        };
+        const formData = new FormData();
+        formData.append('user_email', email);
+        formData.append('user_name', name);
+        formData.append('user_aaddhar', aaddhar);
+        formData.append('user_aaddhar', aaddhar);
+        formData.append('user_address', address);
+        formData.append('user_city', city);
+        formData.append('user_pincode', pincode);
+        formData.append('user_mobile_number', mobile);
+        formData.append('user_date_of_birth', DOB);
+        formData.append('user_gender', gender);
+        formData.append('user_blood_group', bloodGroup);
+        formData.append('user_height', height);
+        formData.append('user_weight', weight);
+        formData.append('user_purpose', purpose);
+        formData.append('user_training_type', trainingType);
+        formData.append('user_medical_history', medicalHistory);
+        formData.append('user_past_gym', previousGym);
+        formData.append('user_past_protien', pastProtien);
+        formData.append('photo', imageFile);
 
-        const headers = new Headers( { 'Content-Type': 'application/json' });
-        const requestOptions = new RequestOptions({ headers: headers });
-
-        return this.http.post(this.createUrl, body, requestOptions);
+        return this.http.post(this.createUrl, formData);
 
     }
 
@@ -60,5 +60,22 @@ export class FormService {
     }
     public getPurpose() {
         return this.http.get('./assets/purpose.json');
+    }
+    public getWeightLoss() {
+        return this.http.get('./assets/weightloss.json');
+    }
+
+    public firstBill(
+        user_id: Number,
+        user_plan: Number,
+        user_payment_method: Number,
+        due_date: String
+    ) {
+        const body = { user_id: user_id, user_plan: user_plan, payment_method: user_payment_method, due_date: due_date };
+        console.log(body);
+        const headers = new Headers({ 'Content-Type': 'application/json' });
+        const requestOptions = new RequestOptions({ headers: headers });
+        return this.http.post(this.billUrl, body, requestOptions);
+
     }
 }

@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './layout.component';
 import { GetUserComponent } from './tables/get-user/get-user.component';
-import { GetUserBillingComponent } from './tables/get-user-billing/get-user-billing';
+import { GetUserBillingComponent } from './form/get-user-billing/get-user-billing.component';
+import { GetUserDietComponent } from './form/get-user-diet/get-user-diet.component';
 
 const routes: Routes = [
     {
@@ -19,7 +20,8 @@ const routes: Routes = [
             { path: 'components', loadChildren: './bs-component/bs-component.module#BsComponentModule' },
             { path: 'blank-page', loadChildren: './blank-page/blank-page.module#BlankPageModule' },
             { path: 'users/get', component: GetUserComponent },
-            { path: 'users/get-billing', component: GetUserBillingComponent}
+            { path: 'users/user-billing', component: GetUserBillingComponent },
+            { path: 'users/user-diet', component: GetUserDietComponent }
         ]
     }
 ];
@@ -28,4 +30,4 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class LayoutRoutingModule {}
+export class LayoutRoutingModule { }

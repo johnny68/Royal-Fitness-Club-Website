@@ -8,10 +8,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OrderModule } from 'ngx-order-pipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-
-
 @NgModule({
-    imports: [CommonModule,
+    imports: [
+        CommonModule,
         OrderModule,
         FormRoutingModule,
         PageHeaderModule,
@@ -21,4 +20,4 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ],
     declarations: [FormComponent]
 })
-export class FormModule {}
+export class FormModule { }
