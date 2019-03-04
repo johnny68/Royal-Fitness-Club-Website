@@ -68,9 +68,9 @@
       <h4>Membership Details</h4>
       <div class="form-group">
         <label>Training Type</label>
-        <select formControlName="training" #training [ngModel]="singletype" (change)="trainingSelectedValue(training.value)"
+        <select formControlName="training" #training [ngModel]="singleType" (change)="trainingSelectedValue(training.value)"
           class="form-control">
-          <option *ngFor="let singletype of trainingtypes" [value]="singletype.id">{{singletype.type}}</option>
+          <option *ngFor="let singleType of trainingtypes" [value]="singleType.id">{{singleType.type}}</option>
         </select>
         <span class="text-danger" *ngIf="register_form.controls['training'].hasError('required') && (register_form.controls['training'].dirty || register_form.controls['training'].touched)">
           This field is required
