@@ -11,7 +11,7 @@
           </tr>
         </thead>
         <tbody>
-          <ng-container *ngFor="let user of users;"  >
+          <ng-container *ngFor="let user of users | paginate: { itemsPerPage: 15, currentPage: p };"  >
             <tr [ngClass] = "user.user_active === 'Y' ? 'table-success' : 'table-danger'" (click)="gotoUser(user)">
               <td>{{user.user_id}}</td>
               <td>{{user.user_email}}</td>
@@ -19,6 +19,7 @@
             </tr>
           </ng-container>
         </tbody>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
       </table>
     </div>
   </div>

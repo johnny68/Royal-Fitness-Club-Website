@@ -6,7 +6,7 @@
       <div class="form-group">
       </div>
       <div class="form-group">
-        <label>Memeber Plan Type</label>
+        <label>Member Plan Type</label>
         <select formControlName="planType" #plan [ngModel]="planType" class="form-control" (change) = "selectedPlan(plan.value)" >
           <option *ngFor="let planType of plans" [value]="planType.id">{{planType.memberPlan}}</option>
         </select>
@@ -47,5 +47,9 @@
       </div>
       <button (click)="onSave()" style="margin-right: 20px;" [disabled]="billing_form.invalid" class="btn btn-success">Confirm Bill</button>
     </div>
+  </div>
+
+  <div class="form-group">
+    <button (click)="onSave()" style="margin-right: 20px;" [disabled]="billing_form.invalid" class="btn btn-success">Confirm Bill</button>
   </div>
 </div>

@@ -24,31 +24,31 @@ export class FormService {
         trainingType: string,
         medicalHistory: string,
         previousGym: string,
-        pastProtien: string,
-        imageFile: any
+        pastProtien: string
     ) {
-        const formData = new FormData();
-        formData.append('user_email', email);
-        formData.append('user_name', name);
-        formData.append('user_aaddhar', aaddhar);
-        formData.append('user_aaddhar', aaddhar);
-        formData.append('user_address', address);
-        formData.append('user_city', city);
-        formData.append('user_pincode', pincode);
-        formData.append('user_mobile_number', mobile);
-        formData.append('user_date_of_birth', DOB);
-        formData.append('user_gender', gender);
-        formData.append('user_blood_group', bloodGroup);
-        formData.append('user_height', height);
-        formData.append('user_weight', weight);
-        formData.append('user_purpose', purpose);
-        formData.append('user_training_type', trainingType);
-        formData.append('user_medical_history', medicalHistory);
-        formData.append('user_past_gym', previousGym);
-        formData.append('user_past_protien', pastProtien);
-        formData.append('photo', imageFile);
+        const body = {
+            user_email : email,
+            user_name : name,
+            user_aaddhar : aaddhar,
+            user_address : address,
+            user_city : city,
+            user_pincode : pincode,
+            user_mobile_number : mobile,
+            user_date_of_birth : DOB,
+            user_gender : gender,
+            user_blood_group : bloodGroup,
+            user_height : height,
+            user_weight : weight,
+            user_purpose : purpose,
+            user_training_type : trainingType,
+            user_medical_history : medicalHistory,
+            user_past_gym : previousGym,
+            user_past_protien : pastProtien
+        };
+        const headers = new Headers({ 'Content-Type': 'application/json' });
+        const requestOptions = new RequestOptions({ headers: headers });
 
-        return this.http.post(this.createUrl, formData);
+        return this.http.post(this.createUrl, body, requestOptions);
 
     }
 

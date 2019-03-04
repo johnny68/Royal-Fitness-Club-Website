@@ -14,6 +14,8 @@ import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
 import { UserTableService } from './layout/tables/user.service';
 import { FormService } from './layout/form/form.service';
+import { GetBillsService } from './layout/tables/get-user/get-bills.service';
+import { MakePaymentService } from './layout/make-payment/make-payment.service';
 
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) => {
@@ -47,7 +49,8 @@ export const createTranslateLoader = (http: HttpClient) => {
         LoginService,
         UserTableService,
         SignupService,
-        FormService],
+        FormService,
+        GetBillsService, MakePaymentService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

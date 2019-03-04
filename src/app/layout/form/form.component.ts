@@ -6,6 +6,8 @@ import { FormService } from './form.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { stringify } from '@angular/compiler/src/util';
+import {WebcamImage, WebcamInitError, WebcamUtil} from 'ngx-webcam';
+
 
 
 @Component({
@@ -245,7 +247,7 @@ export class FormComponent implements OnInit {
             stringify(this.citynumber), stringify(this.pincode), stringify(this.mobileNumber), stringify(this.birthday),
             stringify(this.gender), stringify(this.bloodGroup), stringify(this.height), stringify(this.weight),
             stringify(this.purposeNumber), stringify(this.trainingNumber), stringify(this.medicalHistory), stringify(this.previousGym),
-            stringify(this.pastProtien), this.selectedImage)
+            stringify(this.pastProtien))
             .subscribe((response) => {
                 console.log(this.mobileNumber);
                 const body = response.json();

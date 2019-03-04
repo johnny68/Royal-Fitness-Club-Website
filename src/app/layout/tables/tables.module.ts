@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { TablesRoutingModule } from './tables-routing.module';
 import { TablesComponent } from './tables.component';
@@ -11,7 +12,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         CommonModule,
         TablesRoutingModule,
         PageHeaderModule,
-        NgbModule],
+        NgbModule,
+        NgxPaginationModule],
     declarations: [TablesComponent],
     exports: []
 })

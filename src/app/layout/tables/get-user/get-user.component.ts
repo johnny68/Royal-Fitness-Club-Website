@@ -96,4 +96,8 @@ export class GetUserComponent implements OnInit {
     }
     return trainingType;
   }
+
+  onGetBill() {
+    this.router.navigate(['users/bills'], {queryParams: {id: this.user_id}});
+  }
 }
