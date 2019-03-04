@@ -14,7 +14,7 @@
         </tr>
       </thead>
       <tbody>
-        <ng-container *ngFor="let data of datas | paginate: { itemsPerPage: 15, currentPage: p }; let index = index">
+        <ng-container *ngFor="let data of datas; let index = index">
           <tr (click)="gotoUser(data)">
             <td>{{data.user_id}}</td>
             <td>{{data.user_name}}</td>
